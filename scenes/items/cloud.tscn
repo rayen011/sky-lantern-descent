@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwl5jjhpnny52"]
+
+[ext_resource type="Script" uid="uid://bp77q61a1n4ya" path="res://scripts/items/item.gd" id="1_e1sug"]
+[ext_resource type="Resource" uid="uid://c6jlewk630cm7" path="res://resources/cloud.tres" id="2_a463s"]
+[ext_resource type="Texture2D" uid="uid://biti381hbkrn0" path="res://assets/sprites/cloud.png" id="3_a463s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e1sug"]
+size = Vector2(124, 74)
+
+[node name="cloud" type="Area2D"]
+z_index = 1
+collision_layer = 4
+script = ExtResource("1_e1sug")
+stats = ExtResource("2_a463s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(3.9375, 4.9)
+texture = ExtResource("3_a463s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_e1sug")

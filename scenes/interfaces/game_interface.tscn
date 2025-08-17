@@ -1,16 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp0xwmtyd04ng"]
+[gd_scene load_steps=3 format=3 uid="uid://cp0xwmtyd04ng"]
 
 [ext_resource type="FontFile" uid="uid://duodd2phdjvbf" path="res://fonts/Pixellari.ttf" id="1_1kqtm"]
 [ext_resource type="Script" uid="uid://bt03hc0trbyc4" path="res://scripts/game_interface.gd" id="1_g8ldk"]
-[ext_resource type="Texture2D" uid="uid://hvd2eeoogrl3" path="res://assets/sprites/candle_icon.png" id="2_rp7mt"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uexv2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxsga"]
-bg_color = Color(0, 0, 0, 0.360784)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kqtm"]
-bg_color = Color(0.968627, 0.317647, 0.32549, 1)
 
 [node name="game_interface" type="Control"]
 layout_mode = 3
@@ -21,43 +12,52 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_g8ldk")
 
-[node name="Panel" type="Panel" parent="."]
-layout_mode = 0
-offset_right = 243.0
-offset_bottom = 77.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_uexv2")
-
-[node name="fire_bar" type="ProgressBar" parent="Panel"]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 36.0
-offset_right = 237.0
-offset_bottom = 82.0
-theme_override_styles/background = SubResource("StyleBoxFlat_mxsga")
-theme_override_styles/fill = SubResource("StyleBoxFlat_1kqtm")
-max_value = 1.0
-step = 0.001
-value = 1.0
-
-[node name="TextureRect" type="TextureRect" parent="Panel"]
-layout_mode = 0
-offset_left = 226.0
-offset_top = 4.0
-offset_right = 266.0
-offset_bottom = 44.0
-scale = Vector2(2, 2)
-texture = ExtResource("2_rp7mt")
-
 [node name="time_label" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -36.0
-offset_top = 110.0
-offset_right = 77.0
-offset_bottom = 161.0
+offset_left = -52.0
+offset_top = 122.0
+offset_right = 20.0
+offset_bottom = 154.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("1_1kqtm")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 32
 text = "55:55"
+
+[node name="dist_label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 92.0
+offset_top = 9.0
+offset_right = 278.0
+offset_bottom = 41.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_1kqtm")
+theme_override_font_sizes/font_size = 32
+text = "land in: 900M"
+
+[node name="fall_speed_label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 22.0
+offset_right = 273.0
+offset_bottom = 54.0
+theme_override_fonts/font = ExtResource("1_1kqtm")
+theme_override_font_sizes/font_size = 32
+text = "fall speed"
+autowrap_mode = 3
+
+[node name="fire_label" type="Label" parent="."]
+layout_mode = 1
+offset_left = 13.0
+offset_top = 90.0
+offset_right = 199.0
+offset_bottom = 122.0
+theme_override_fonts/font = ExtResource("1_1kqtm")
+theme_override_font_sizes/font_size = 32
+text = "Fire:50%"
+autowrap_mode = 3

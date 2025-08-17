@@ -1,15 +1,23 @@
 extends Control
 
-var lantern
-# Called when the node enters the scene tree for the first time.
+var lantern: Lantern
+
 func _ready() -> void:
 	lantern = get_tree().get_first_node_in_group("Lantern")
-	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	lantern = get_tree().get_first_node_in_group("Lantern")
-	$Panel/fire_bar.max_value = lantern.max_fire
-	$Panel/fire_bar.value = lantern.fire_power / lantern.max_fire * 100.0
-	$time_label.text = str(int(lantern.time_passed))
+	if not lantern:
+		return
+
+	# --- Time ---
+	$time_label.text = "Time: " + str(int(lantern.time_passed)) + "s"
+
+	# --- Distance left ---
+	$dist_label.text = "Distance left: " + str(int(lantern.current_distance))
+
+	# --- Fall speed ---
+	$fall_speed_label.text = "Fall speed: " + str(round(lantern.velocity.y))
+
+	# --- Fire power ---
+	var fire_percent = int((lantern.fire_power / lantern.max_fire) * 100)
+	$fire_label.text = "Fire: " + str(fire_percent) + "%"

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ObstacleStats" load_steps=2 format=3 uid="uid://c6jlewk630cm7"]
+
+[ext_resource type="Script" uid="uid://b7saseljvyu5x" path="res://resources/obstacle_stats.gd" id="1_3yvqq"]
+
+[resource]
+script = ExtResource("1_3yvqq")
+move_speed = 10.0
+sway_amplitude = 10.0
+sway_speed = 1.0
+damage = 5.0
+knockback = 0.0
+metadata/_custom_type_script = "uid://b7saseljvyu5x"
