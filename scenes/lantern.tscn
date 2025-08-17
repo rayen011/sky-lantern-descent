@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dph7v51bpmtei"]
+
+[ext_resource type="Texture2D" uid="uid://bn1el440x7ky5" path="res://assets/sprites/lantern.png" id="1_hhuhv"]
+[ext_resource type="Script" uid="uid://b08okoou5d0tl" path="res://scripts/lantern.gd" id="1_uxgnm"]
+[ext_resource type="Texture2D" uid="uid://ceigv83vkybd" path="res://assets/sprites/fire_sprite.png" id="3_jdg25"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_uxgnm"]
+radius = 12.0416
+
+[sub_resource type="Curve" id="Curve_y6stn"]
+_data = [Vector2(0, 0.377096), 0.0, 0.0, 0, 0, Vector2(0.277567, 0.115477), -0.804225, -0.804225, 0, 0, Vector2(0.494297, 0.233828), 0.0, 0.0, 0, 0, Vector2(0.764259, 0.395783), -0.468067, -0.468067, 0, 0, Vector2(1, 0.377096), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="Gradient" id="Gradient_4a08e"]
+offsets = PackedFloat32Array(0.222222, 0.431111, 0.782222, 1)
+colors = PackedColorArray(1, 0.137255, 0, 1, 0.992157, 0.94902, 0.0627451, 1, 0.968627, 0.552941, 0.0352941, 1, 0.992157, 0.94902, 0.0627451, 0)
+
+[node name="lantern" type="CharacterBody2D" groups=["Lantern"]]
+scale = Vector2(3, 3)
+script = ExtResource("1_uxgnm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hhuhv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_uxgnm")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 6)
+amount = 10
+texture = ExtResource("3_jdg25")
+lifetime = 5.0
+lifetime_randomness = 1.0
+direction = Vector2(0, -1)
+spread = 79.05
+gravity = Vector2(0, -100)
+initial_velocity_min = 5.0
+initial_velocity_max = 8.0
+scale_amount_curve = SubResource("Curve_y6stn")
+color_ramp = SubResource("Gradient_4a08e")
