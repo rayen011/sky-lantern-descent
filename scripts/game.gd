@@ -13,6 +13,7 @@ func _ready():
 	randomize()
 
 func _process(delta):
+	
 	if not lantern:
 		return
 

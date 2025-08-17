@@ -1,66 +1,56 @@
 extends CharacterBody2D
 class_name Lantern
 
-const SPEED = 200.0
-@export var screen_margin: float = 32
-@export var max_tilt: float = 15.0
-@export var min_descent: float = 10.0
-@export var max_descent: float = 50.0
+@export var SPEED = 200.0
+@export var max_tilt = 15.0
+@export var bob_amplitude = 15
+@export var bob_speed = 5
 
-@export var fire_power: float = 100.0
-@export var max_fire: float = 100.0
+@export var max_distance: float = 2000.0
+var current_distance: float = max_distance
 
-@export var max_distance: float = 1200.0 # total journey to ground
-var current_distance: float
+@export var ground_y: float = 748.74  # Y position of visual ground
 
 var time_passed: float = 0.0
 var landed: bool = false
 
-func _ready() -> void:
-	current_distance = max_distance
-
-func _physics_process(delta: float) -> void:
-	if landed:
-		return
-	
+func _physics_process(delta):
 	time_passed += delta
 
-	# --- Fire drains ---
-	fire_power = max(fire_power - 5 * delta, 0)
-
-	# --- Horizontal movement ---
-	var direction := Input.get_axis("left", "right")
-	if direction:
+	# Horizontal input
+	var direction = Input.get_axis("left", "right")
+	if direction != 0:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	# --- Vertical descent (based on fire) ---
-	var t = 1.0 - (fire_power / max_fire) # 0 = full fire, 1 = empty fire
-	velocity.y = lerp(min_descent, max_descent, t)
+	if not landed:
+		# Calculate remaining distance based on visual ground
+		var distance_to_ground = ground_y - global_position.y
+		current_distance = clamp(distance_to_ground, 0, max_distance)
 
+		# Vertical speed based on distance left
+		var t = 1.0 - (current_distance / max_distance)
+		velocity.y = lerp(50, 300, t)
+
+	# Move lantern
 	move_and_slide()
 
-	# --- Keep inside horizontal bounds ---
-	var viewport_size = get_viewport_rect().size
-	global_position.x = clamp(global_position.x, screen_margin, viewport_size.x - screen_margin)
+	# Tilt effect
+	rotation_degrees = lerp(rotation_degrees, (velocity.x / SPEED) * max_tilt, 0.1)
 
-	# --- Apply descent to journey distance ---
-	current_distance = max(current_distance - velocity.y * delta, 0)
+	# Bobbing effect only if not landed
+	if not landed:
+		global_position.y += sin(time_passed * bob_speed) * bob_amplitude * delta
 
-	# --- Check if reached ground ---
-	if current_distance <= 0:
-		_on_reach_ground()
+	# Landing check
+	if global_position.y >= ground_y and not landed:
+		global_position.y = ground_y
+		velocity = Vector2.ZERO
+		landed = true
+		current_distance = 0
+		on_landed()
 
-	# --- Tilt ---
-	var tilt = (velocity.x / SPEED) * max_tilt
-	rotation_degrees = lerp(rotation_degrees, tilt, 0.1)
-
-
-func restore_fire(amount: float) -> void:
-	fire_power = clamp(fire_power + amount, 0, max_fire)
-
-func _on_reach_ground() -> void:
-	landed = true
-	velocity = Vector2.ZERO
-	print("Lantern has landed! 🎉") # Replace with end screen/game win
+func on_landed():
+	print("Lantern has landed!")
+	# Add landing effects here

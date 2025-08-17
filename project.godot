@@ -49,6 +49,7 @@ right={
 2d_physics/layer_1="lantern"
 2d_physics/layer_2="power"
 2d_physics/layer_3="obs"
+2d_physics/layer_4="ground"
 
 [physics]
 
