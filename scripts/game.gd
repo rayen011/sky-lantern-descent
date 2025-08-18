@@ -9,6 +9,7 @@ var spawn_timer: float = 0.0
 var lantern: Node2D
 
 func _ready():
+	Engine.time_scale = 1.0
 	lantern = get_tree().get_first_node_in_group("Lantern")
 	randomize()
 
@@ -21,7 +22,12 @@ func _process(delta):
 	if spawn_timer >= spawn_interval:
 		spawn_timer = 0.0
 		spawn_object()
-
+	if lantern.landed:
+		Engine.time_scale = 0.0
+		$CanvasLayer/Game_over_screen.visible = true
+	else:
+		$CanvasLayer/Game_over_screen.visible = false
+		Engine.time_scale = 1.0
 func spawn_object():
 	var camera = get_viewport().get_camera_2d()
 	if not camera:

@@ -1,0 +1,112 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjssekwig4lh7"]
+
+[ext_resource type="FontFile" uid="uid://duodd2phdjvbf" path="res://fonts/Pixellari.ttf" id="1_4o20c"]
+[ext_resource type="Script" uid="uid://blx4g8wxy7uk1" path="res://scripts/game_over_screen.gd" id="1_x4tj2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4tj2"]
+bg_color = Color(0.14902, 0.0470588, 0.054902, 0.627451)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_blend = true
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gehw6"]
+bg_color = Color(0.455667, 0.277785, 0.156221, 0.788235)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4o20c"]
+bg_color = Color(0.39522, 0.0640896, 0.0722135, 0.729412)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[node name="Game_over_screen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x4tj2")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 212.0
+offset_right = -22.0
+offset_bottom = -212.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_x4tj2")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -284.0
+offset_top = 53.0
+offset_right = 293.0
+offset_bottom = 160.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_4o20c")
+theme_override_font_sizes/font_size = 106
+text = "GAME OVER"
+
+[node name="time_label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -251.0
+offset_top = 177.0
+offset_right = 158.0
+offset_bottom = 229.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_4o20c")
+theme_override_font_sizes/font_size = 51
+text = "AIR TIME: 1m 30s"
+
+[node name="again_b" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -172.0
+offset_top = -366.0
+offset_right = 172.0
+offset_bottom = -233.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_4o20c")
+theme_override_font_sizes/font_size = 106
+theme_override_styles/normal = SubResource("StyleBoxFlat_gehw6")
+text = "AGAIN"
+
+[node name="exit_b" type="Button" parent="."]
+layout_mode = 0
+offset_left = 541.0
+offset_top = 567.0
+offset_right = 629.0
+offset_bottom = 615.0
+theme_override_fonts/font = ExtResource("1_4o20c")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_4o20c")
+text = "EXIT"
+
+[connection signal="pressed" from="again_b" to="." method="_on_again_b_pressed"]
+[connection signal="pressed" from="exit_b" to="." method="_on_exit_b_pressed"]

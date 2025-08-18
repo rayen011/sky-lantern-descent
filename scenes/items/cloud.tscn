@@ -1,17 +1,147 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwl5jjhpnny52"]
+[gd_scene load_steps=10 format=3 uid="uid://cwl5jjhpnny52"]
 
 [ext_resource type="Script" uid="uid://bp77q61a1n4ya" path="res://scripts/items/item.gd" id="1_e1sug"]
 [ext_resource type="Resource" uid="uid://c6jlewk630cm7" path="res://resources/cloud.tres" id="2_a463s"]
 [ext_resource type="Texture2D" uid="uid://biti381hbkrn0" path="res://assets/sprites/cloud.png" id="3_a463s"]
+[ext_resource type="AudioStream" uid="uid://fuo6e7mths3r" path="res://sounds/pick.wav" id="4_s32jd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e1sug"]
 size = Vector2(124, 74)
+
+[sub_resource type="Curve" id="Curve_a463s"]
+_limits = [-20.0, 32.6018, 0.0, 1.0]
+_data = [Vector2(0, 8.35506), 0.0, 0.0, 0, 0, Vector2(0.273764, 3.11253), 0.0, 0.0, 0, 0, Vector2(0.577947, 6.38911), 0.0, 0.0, 0, 0, Vector2(0.958175, 4.42316), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Animation" id="Animation_a463s"]
+resource_name = "explode"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s32jd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:monitoring")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:monitorable")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bxulk"]
+_data = {
+&"RESET": SubResource("Animation_s32jd"),
+&"explode": SubResource("Animation_a463s")
+}
 
 [node name="cloud" type="Area2D"]
 z_index = 1
 collision_layer = 4
 script = ExtResource("1_e1sug")
 stats = ExtResource("2_a463s")
+ascend_speed = 150.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(3.9375, 4.9)
@@ -19,3 +149,33 @@ texture = ExtResource("3_a463s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_e1sug")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.509804)
+emitting = false
+amount = 50
+texture = ExtResource("3_a463s")
+lifetime = 1.5
+one_shot = true
+explosiveness = 0.92
+lifetime_randomness = 0.76
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+angle_min = -20.0
+angle_max = 20.0
+angle_curve = SubResource("Curve_a463s")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bxulk")
+}
+
+[node name="crash" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_s32jd")
+volume_db = -13.565
+pitch_scale = 1.49
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -8,7 +8,8 @@ var time_passed: float = 0.0
 
 # Base ascending speed of the obstacle (will move up automatically)
 @export var ascend_speed: float = 200.0
-
+func _ready() -> void:
+	$AnimationPlayer.play("RESET")
 func _process(delta: float) -> void:
 	time_passed += delta
 
@@ -26,6 +27,8 @@ func _process(delta: float) -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Lantern:
+		$crash.play()
+		$AnimationPlayer.play("explode")
 		# Apply damage to lantern's fire power
 		body.fire_power = max(body.fire_power - stats.damage, 0)
 
@@ -33,4 +36,4 @@ func _on_body_entered(body: Node) -> void:
 		if stats.knockback != 0:
 			body.velocity.x += stats.knockback
 
-		queue_free()
+		

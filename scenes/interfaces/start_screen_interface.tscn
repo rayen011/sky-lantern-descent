@@ -1,0 +1,103 @@
+[gd_scene load_steps=10 format=3 uid="uid://dve6s5x2nngbc"]
+
+[ext_resource type="Texture2D" uid="uid://dejh84bwjwdv0" path="res://assets/art/start screen image.png" id="1_aj88b"]
+[ext_resource type="Script" uid="uid://cxmagsicfsdk0" path="res://scripts/start_screen_interface.gd" id="1_b5fsg"]
+[ext_resource type="FontFile" uid="uid://duodd2phdjvbf" path="res://fonts/Pixellari.ttf" id="2_b21bx"]
+[ext_resource type="AudioStream" uid="uid://cgciiqepx4uqb" path="res://sounds/mixkit-silent-descent-614.mp3" id="4_ifgln"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nuwn"]
+bg_color = Color(1, 0.215686, 0.270588, 0.619608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5fsg"]
+bg_color = Color(1, 0.525615, 0.507721, 0.619608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ifgln"]
+bg_color = Color(1, 0.215686, 0.270588, 0.619608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fg8s5"]
+bg_color = Color(1, 0.525615, 0.507721, 0.619608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b21bx"]
+bg_color = Color(1, 0.215686, 0.270588, 0.619608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="startScreenInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b5fsg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_aj88b")
+centered = false
+
+[node name="start_b" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -127.0
+offset_top = -225.0
+offset_right = 127.0
+offset_bottom = -118.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_b21bx")
+theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxFlat_3nuwn")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b5fsg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_b5fsg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ifgln")
+text = "START"
+
+[node name="quit_b" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -103.0
+offset_top = -101.0
+offset_right = 103.0
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_b21bx")
+theme_override_font_sizes/font_size = 66
+theme_override_styles/focus = SubResource("StyleBoxFlat_ifgln")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b5fsg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fg8s5")
+theme_override_styles/normal = SubResource("StyleBoxFlat_b21bx")
+text = "QUIT"
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ifgln")
+autoplay = true
+
+[connection signal="pressed" from="start_b" to="." method="_on_start_b_pressed"]
+[connection signal="pressed" from="quit_b" to="." method="_on_quit_b_pressed"]

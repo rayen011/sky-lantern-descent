@@ -7,6 +7,6 @@ script = ExtResource("1_3yvqq")
 move_speed = 10.0
 sway_amplitude = 10.0
 sway_speed = 1.0
-damage = 5.0
+damage = 10.0
 knockback = 0.0
 metadata/_custom_type_script = "uid://b7saseljvyu5x"

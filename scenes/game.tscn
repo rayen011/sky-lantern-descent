@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://der68l8au4xla"]
+[gd_scene load_steps=15 format=3 uid="uid://der68l8au4xla"]
 
 [ext_resource type="Script" uid="uid://diit4o6xuqfo1" path="res://scripts/game.gd" id="1_u5sy4"]
 [ext_resource type="Script" uid="uid://cp62iwy5118ai" path="res://scripts/parallax_background.gd" id="2_lnu2h"]
@@ -9,7 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://edxkd1o1kncd" path="res://scenes/fire_power.tscn" id="5_iywne"]
 [ext_resource type="PackedScene" uid="uid://cwl5jjhpnny52" path="res://scenes/items/cloud.tscn" id="6_p57ef"]
 [ext_resource type="Texture2D" uid="uid://bjmkykr8yuwih" path="res://assets/sprites/ground.png" id="8_gee14"]
+[ext_resource type="PackedScene" uid="uid://bjssekwig4lh7" path="res://scenes/interfaces/game_over_screen.tscn" id="9_kvpfn"]
 [ext_resource type="Script" uid="uid://d3hk8da2opxkh" path="res://scripts/ground.gd" id="9_vtaks"]
+[ext_resource type="AudioStream" uid="uid://cgciiqepx4uqb" path="res://sounds/mixkit-silent-descent-614.mp3" id="12_dinhu"]
 
 [sub_resource type="Environment" id="Environment_lnu2h"]
 background_mode = 3
@@ -63,6 +65,9 @@ environment = SubResource("Environment_lnu2h")
 
 [node name="game_interface" parent="CanvasLayer" instance=ExtResource("4_lbhrr")]
 
+[node name="Game_over_screen" parent="CanvasLayer" instance=ExtResource("9_kvpfn")]
+visible = false
+
 [node name="ground" type="Area2D" parent="."]
 position = Vector2(361, 748.74)
 scale = Vector2(27.12, 14.93)
@@ -78,3 +83,7 @@ texture = ExtResource("8_gee14")
 position = Vector2(0, 0.999996)
 shape = SubResource("RectangleShape2D_vtaks")
 debug_color = Color(0, 0.6, 0.701961, 0.184314)
+
+[node name="music" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_dinhu")
+autoplay = true
